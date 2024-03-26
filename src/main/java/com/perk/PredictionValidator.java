@@ -1,8 +1,6 @@
 package com.perk;
 
-import java.util.Objects;
-
-import static java.util.Objects.*;
+import static java.util.Objects.requireNonNull;
 
 public class PredictionValidator {
 
@@ -14,7 +12,8 @@ public class PredictionValidator {
         final var predictionInteger = Integer.parseInt(prediction);
 
         if (predictionInteger < MIN || predictionInteger > MAX) {
-            //todo throw an exception
+            //todo handle exceptions and prevent crash
+            throw new UnsupportedOperationException("Prediction out of bounds. Valid inputs are %d through %d.".formatted(MIN, MAX));
         }
     }
 }
