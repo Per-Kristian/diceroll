@@ -4,16 +4,19 @@ import static java.util.Objects.requireNonNull;
 
 public class PredictionValidator {
 
-    private static final Integer MIN = 1;
-    private static final Integer MAX = 6;
+    public static final Integer MIN = 1;
+    public static final Integer MAX = 6;
 
-    public static void validate(final String prediction) {
+    public static Integer validate(final String prediction) {
         requireNonNull(prediction);
-        final var predictionInteger = Integer.parseInt(prediction);
+        return validate(Integer.parseInt(prediction));
+    }
 
-        if (predictionInteger < MIN || predictionInteger > MAX) {
-            //todo handle exceptions and prevent crash
-            throw new UnsupportedOperationException("Prediction out of bounds. Valid inputs are %d through %d.".formatted(MIN, MAX));
+    public static Integer validate(final Integer prediction) {
+        requireNonNull(prediction);
+        if (prediction < MIN || prediction > MAX) {
+            throw new UnsupportedOperationException(STR."Invalid prediction. Your guess should be \{MIN} through \{MAX}.");
         }
+        return prediction;
     }
 }

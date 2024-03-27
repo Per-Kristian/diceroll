@@ -1,29 +1,30 @@
 package com.perk;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.time.Duration;
 
 import static com.perk.PredictionValidator.validate;
+import static java.lang.System.console;
+import static java.lang.System.out;
+import static java.lang.Thread.sleep;
 
 public class PredictionReader {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(PredictionReader.class);
-
-    public static void read() {
-        var predictionValidated = false;
-
-        do {
-            System.out.print("Guess the die: ");
-            final var prediction = System.console().readLine();
+    public Integer read() throws InterruptedException {
+        while (true) {
+            out.print("Guess the die: ");
+            final var prediction = console().readLine();
             try {
-                validate(prediction);
-                predictionValidated = true;
-            } catch (UnsupportedOperationException e) {
-                System.out.println(e.getMessage() + " Please try again.");
+                return validate(prediction);
+            } catch (UnsupportedOperationException | NumberFormatException e) {
+                printError(e);
             }
-        } while (!predictionValidated);
+        }
+    }
 
-        LOGGER.info("Prediction read");
-        // todo roll the die
+    private static void printError(final RuntimeException e) throws InterruptedException {
+        out.println(e.getMessage());
+        sleep(Duration.ofSeconds(2));
+        out.println("Please try again.");
+        sleep(Duration.ofSeconds(1));
     }
 }
