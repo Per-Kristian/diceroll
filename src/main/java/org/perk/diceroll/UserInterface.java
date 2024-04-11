@@ -1,5 +1,8 @@
 package org.perk.diceroll;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -9,6 +12,8 @@ import java.util.Scanner;
 import static java.util.Objects.requireNonNull;
 
 public class UserInterface {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserInterface.class);
 
     private final Scanner reader;
     private final PrintWriter writer;
@@ -55,17 +60,12 @@ public class UserInterface {
         writer.println(message);
     }
 
-    /**
-     * Causes the UI thread to sleep for the given {@param duration}.
-     * If the sleep is interrupted, this method throws a {@link UserInterfaceException}.
-     * @param duration The sleep duration
-     */
     public void sleep(final Duration duration) {
         requireNonNull(duration);
         try {
             Thread.sleep(duration);
         } catch (final InterruptedException e) {
-            throw new UserInterfaceException("sleep was interrupted", e);
+            LOGGER.error("Sleep was interrupted", e);
         }
     }
 
