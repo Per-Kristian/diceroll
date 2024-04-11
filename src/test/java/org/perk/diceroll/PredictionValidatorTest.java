@@ -25,7 +25,7 @@ class PredictionValidatorTest {
 
     @Test
     void throwsExceptionWhenPredictionAboveMaximum() {
-        assertThrows(IllegalArgumentException.class, () -> GuessValidator.validate(die.getHighestValue() + 1, die));
+        assertThrows(IllegalArgumentException.class, () -> GuessValidator.validate(die.getMax() + 1, die));
     }
 
     @Test
