@@ -7,5 +7,5 @@ public class UserInterfaceException extends RuntimeException {
     public UserInterfaceException(final String message, final Throwable e) {
         super(requireNonNull(message), requireNonNull(e));
     }
-    
+
 }

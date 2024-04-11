@@ -38,6 +38,12 @@ public class UserInterface {
         }
     }
 
+    public String requireString(final String prompt) {
+        requireNonNull(prompt);
+        write(prompt);
+        return reader.nextLine();
+    }
+
     public void write(final String message) {
         requireNonNull(message);
         writer.print(message);
@@ -47,12 +53,6 @@ public class UserInterface {
     public void writeLine(final String message) {
         requireNonNull(message);
         writer.println(message);
-    }
-
-    public String requireString(final String prompt) {
-        requireNonNull(prompt);
-        write(prompt);
-        return reader.nextLine();
     }
 
     /**

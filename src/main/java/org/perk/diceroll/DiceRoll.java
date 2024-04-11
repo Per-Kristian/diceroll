@@ -10,7 +10,7 @@ public class DiceRoll {
     private final UserInterface ui;
 
     public static void main(final String[] args) {
-        final var die = new Die();
+        final var die = Die.withMaxDots(6);
         final var game = new DiceRoll(die);
         game.start();
     }
@@ -26,7 +26,7 @@ public class DiceRoll {
 
     public void start() {
         do {
-            final var prediction = ui.requireInteger("Guess the die: ", Die.MIN, die.getMax());
+            final var prediction = ui.requireInteger("Guess the die: ", die.getMin(), die.getMax());
 
             ui.writeLine("Rolling the die...");
             ui.sleep(Duration.ofSeconds(2));
