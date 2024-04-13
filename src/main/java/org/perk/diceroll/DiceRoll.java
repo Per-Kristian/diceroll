@@ -26,16 +26,17 @@ public class DiceRoll {
 
     public void start() {
         do {
-            final var prediction = ui.requireInteger("Guess the die: ", die.getMin(), die.getMax());
+            ui.write("Guess the die: ");
+            final var prediction = ui.requireInteger(1, die.getMax());
 
             ui.writeLine("Rolling the die...");
             ui.sleep(Duration.ofSeconds(2));
             final var result = die.roll();
 
             if (prediction != result) {
-                ui.writeLine(STR."You rolled \{result}, unlucky. Better luck next time.");
+                ui.writeLine("The die shows %d, unlucky. Better luck next time.".formatted(result));
             } else {
-                ui.writeLine(STR."You rolled \{result}, congrats!");
+                ui.writeLine("The die shows %d, congrats!".formatted(result));
             }
             ui.sleep(Duration.ofSeconds(2));
         } while (ui.requireString("Play again? Y/N: ").equalsIgnoreCase("Y"));

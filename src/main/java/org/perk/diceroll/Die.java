@@ -6,7 +6,6 @@ import static java.util.Objects.requireNonNull;
 
 public class Die {
 
-    private final int min;
     private final int max;
 
     public static Die withMaxDots(final int maxDots) {
@@ -18,28 +17,19 @@ public class Die {
     }
 
     public Die(final int max) {
-        this(1, max);
-    }
-
-    public Die(final int min, final int max) {
-        if (max < min) {
-            throw new IllegalArgumentException("The maximum amount of dots on the die cannot be less than the minimum");
+        if (max < 1) {
+            throw new IllegalArgumentException("The maximum amount of dots on the die cannot be less than 1");
         }
-        this.min = min;
         this.max = max;
     }
 
     public int roll() {
-        return (int)(Math.random() * (max - min + 1) + min);
+        return (int) (Math.random() * max + 1);
     }
 
     public int roll(final Random random) {
         requireNonNull(random);
         return random.nextInt(max) + 1;
-    }
-
-    public int getMin() {
-        return min;
     }
 
     public int getMax() {

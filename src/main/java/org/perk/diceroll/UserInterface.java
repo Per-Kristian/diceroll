@@ -27,19 +27,20 @@ public class UserInterface {
         this.writer = new PrintWriter(requireNonNull(outputStream), true);
     }
 
-    public int requireInteger(final String prompt, final int min, final int max) {
-        requireNonNull(prompt);
+    public int requireInteger(final int min, final int max) {
         while (true) {
-            write(prompt);
             try {
                 final var input = Integer.parseInt(reader.nextLine());
                 if (input >= min && input <= max) {
                     return input;
                 }
-                writer.println(STR."The number must be between \{min} and \{max}");
+                writer.println("The number must be between %d and %d.".formatted(min, max));
             } catch (final NumberFormatException e) {
-                writer.println("The number must be be a whole number. Please try again.");
+                writer.println("The number must be be a whole number.");
             }
+            sleep(Duration.ofSeconds(1));
+            writer.print("Please try again: ");
+            writer.flush();
         }
     }
 
