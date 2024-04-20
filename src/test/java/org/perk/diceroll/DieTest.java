@@ -3,6 +3,7 @@ package org.perk.diceroll;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class DieTest {
 
@@ -15,6 +16,6 @@ class DieTest {
     void rollsBetweenMinAndMax() {
         final var die = new Die(2);
         int result = die.roll();
-        assert(result == 1 || result == 2);
+        assertTrue(result == 1 || result == 2);
     }
 }
