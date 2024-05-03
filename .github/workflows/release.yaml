@@ -13,11 +13,13 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
-          java-version: '22'
+          java-version: '21'
           distribution: 'temurin'
           cache: 'maven'
-      - run: mvn clean package -DskipTests
-      - uses: actions/upload-artifact@v3
+
+      - name: Package
+        run: mvn clean package -DskipTests
+      - name: Release
+        uses: softprops/action-gh-release@v2
         with:
-          name: Package
-          path: target/*.jar
+          files: target/*.jar
